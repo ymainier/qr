@@ -11,4 +11,6 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // will be deployed to https://ymainier.github.io/qr
+  base: "/qr/",
 });
