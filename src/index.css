@@ -118,3 +118,61 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  /* CSS-only entrance effect for Alert (no JS state). Applies on mount. */
+  .alert-entrance {
+    /* promote to its own layer for smoother animation */
+    will-change: transform, opacity;
+    animation: alert-in 420ms cubic-bezier(.2,.9,.3,1) both;
+    position: relative;
+    overflow: visible;
+  }
+
+  /* subtle expanding ring using a pseudo-element */
+  .alert-entrance::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0.14;
+    transform: scale(0.98);
+    animation: alert-ring 900ms cubic-bezier(.2,.9,.3,1);
+  }
+
+  @keyframes alert-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+    }
+    60% {
+      transform: translateY(0) scale(1.02);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes alert-ring {
+    from {
+      box-shadow: 0 0 0 0 rgba(0,0,0,0.08);
+      opacity: 0.3;
+      transform: scale(0.98);
+    }
+    to {
+      box-shadow: 0 0 0 12px rgba(0,0,0,0);
+      opacity: 0;
+      transform: scale(1);
+    }
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .alert-entrance,
+    .alert-entrance::before {
+      animation: none !important;
+    }
+  }
+}
