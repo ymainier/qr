@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "postbuild": "cp -f dist/index.html dist/404.html",
+    "build": "tsc -b && vite build && cp -f dist/index.html dist/404.html",
     "lint": "eslint .",
     "preview": "vite preview"
   },
