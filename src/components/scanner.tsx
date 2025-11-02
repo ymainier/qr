@@ -4,6 +4,77 @@ import { Link } from "wouter";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
+function Hud() {
+  return (
+    <div
+      className="absolute inset-0 z-40 pointer-events-none"
+      // CSS var --size will be used to size the square responsively
+      style={{ "--size": "min(90vw,80vh)" } as React.CSSProperties}
+    >
+      {/* Top dim */}
+      <div
+        className="absolute left-0 right-0 top-0"
+        style={{
+          height: "calc((100vh - var(--size)) / 2)",
+          backgroundColor: "rgba(0,0,0,0.45)",
+        }}
+      />
+
+      {/* Middle row: left dim, transparent square (center), right dim */}
+      <div
+        className="absolute left-0 right-0"
+        style={{
+          top: "calc((100vh - var(--size)) / 2)",
+          height: "var(--size)",
+        }}
+      >
+        {/* Left dim */}
+        <div
+          className="absolute left-0 top-0 bottom-0"
+          style={{
+            width: "calc((100vw - var(--size)) / 2)",
+            backgroundColor: "rgba(0,0,0,0.45)",
+          }}
+        />
+
+        {/* Center square (transparent) */}
+        <div
+          className="mx-auto relative w-[var(--size)] h-[var(--size)] flex items-end justify-end"
+          style={{
+            border: "1px solid rgba(255,255,255,0.18)",
+            boxShadow:
+              "0 0 0 4px rgba(255,255,255,0.02) inset, 0 8px 24px rgba(0,0,0,0.25)",
+            borderRadius: "0.25rem",
+            overflow: "hidden",
+          }}
+        >
+          <div className="absolute bottom-3 right-3 text-sm text-white/85 font-medium">
+            scanning...
+          </div>
+        </div>
+
+        {/* Right dim */}
+        <div
+          className="absolute right-0 top-0 bottom-0"
+          style={{
+            width: "calc((100vw - var(--size)) / 2)",
+            backgroundColor: "rgba(0,0,0,0.45)",
+          }}
+        />
+      </div>
+
+      {/* Bottom dim */}
+      <div
+        className="absolute left-0 right-0 bottom-0"
+        style={{
+          height: "calc((100vh - var(--size)) / 2)",
+          backgroundColor: "rgba(0,0,0,0.45)",
+        }}
+      />
+    </div>
+  );
+}
+
 export function Scanner() {
   const [scannedData, setScannedData] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -81,7 +152,7 @@ export function Scanner() {
     <div className="relative w-screen h-screen bg-backround">
       <div className="absolute top-4 left-4 z-50">
         <Link href="/" asChild>
-          <Button variant="ghost" className="gap-2">
+          <Button variant="ghost" className="gap-2 bg-white/50">
             <ArrowLeft className="w-4 h-4" />
             Back
           </Button>
@@ -94,6 +165,9 @@ export function Scanner() {
         muted
         className="w-full h-full object-cover z-0"
       />
+
+      {/* HUD overlay: centered adaptive square with dimmed outside and highlighted border */}
+      <Hud />
 
       {scannedData && (
         <Alert
