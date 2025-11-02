@@ -151,7 +151,7 @@ export function Scanner() {
   return (
     <div className="relative w-screen h-screen bg-backround">
       <div className="absolute top-4 left-4 z-50">
-        <Link href="/" asChild>
+        <Link href="/qr" asChild>
           <Button variant="ghost" className="gap-2 bg-white/50">
             <ArrowLeft className="w-4 h-4" />
             Back

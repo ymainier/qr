@@ -9,23 +9,23 @@ import { Scanner } from "@/components/scanner";
 export default function Home() {
   return (
     <Switch>
-      <Route path="/generate">
+      <Route path="/qr/generate">
         <Generator />
       </Route>
-      <Route path="/scan">
+      <Route path="/qr/scan">
         <Scanner />
       </Route>
       <Route>
         <main className="min-h-screen bg-background">
           <div className="container mx-auto px-4 py-8 max-w-4xl">
             <div className="flex gap-2 mb-8 justify-center">
-              <Link href="/generate" asChild>
+              <Link href="/qr/generate" asChild>
                 <Button className="gap-2">
                   <QrCode className="w-4 h-4" />
                   Generate
                 </Button>
               </Link>
-              <Link href="/scan" asChild>
+              <Link href="/qr/scan" asChild>
                 <Button className="gap-2">
                   <Scan className="w-4 h-4" />
                   Scan

@@ -53,7 +53,7 @@ export function Generator() {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="space-y-6">
           <div className="mb-4">
-            <Link href="/" asChild>
+            <Link href="/qr" asChild>
               <Button variant="ghost" className="gap-2">
                 <ArrowLeft className="w-4 h-4" />
                 Back
